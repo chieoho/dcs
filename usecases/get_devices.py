@@ -5,7 +5,7 @@
 @author: Jaden Wu
 @time: 2021/10/4 16:53
 """
-from control_system.repo_if import repo_if
+from usecases.repo_if import repo_if
 
 
 def get_controllers(repo):

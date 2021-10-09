@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from PyQt4 import QtCore, QtGui
-from qt.ui.dcs_ui import Ui_MainWindow
+from infrastructures.qt.ui.dcs_ui import Ui_MainWindow
 
 
 buttonStyleSheet = '''

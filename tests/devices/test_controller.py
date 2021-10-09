@@ -5,7 +5,7 @@
 @author: Jaden Wu
 @time: 2021/10/1 20:51
 """
-from devices.controller import Controller
+from entities.controller import Controller
 
 
 def test_controller():

@@ -3,8 +3,8 @@ import sys
 from PyQt4 import QtGui
 from PyQt4.QtGui import QApplication
 from PyQt4.QtCore import Qt
-from qt.main_window import MainWindow
-from qt.edit_devices import AddController
+from infrastructures.qt.main_window import MainWindow
+from infrastructures.qt.edit_devices import AddController
 
 
 def main():

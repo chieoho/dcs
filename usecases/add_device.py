@@ -5,7 +5,7 @@
 @author: Jaden Wu
 @time: 2021/10/2 15:31
 """
-from control_system.repo_if import repo_if
+from usecases.repo_if import repo_if
 
 controller_fields = (
     "area",

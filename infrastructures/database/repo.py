@@ -5,9 +5,9 @@
 @author: Jaden Wu
 @time: 2021/10/5 8:42
 """
-from control_system.repo_if import RepoIf
-from database.model import CtrlDev
-from database.crud import CRUD
+from usecases.repo_if import RepoIf
+from infrastructures.database.model import CtrlDev
+from infrastructures.database.crud import CRUD
 
 
 class DevRepo(RepoIf):
@@ -15,7 +15,7 @@ class DevRepo(RepoIf):
         self.dev_repo = CRUD(CtrlDev)
 
     def add_controllers(self, controller_list):
-        self.dev_repo.add(controller_list)
+        return self.dev_repo.add(controller_list)
 
     def get_controllers(self):
-        self.dev_repo.query({})
+        return self.dev_repo.query({})
