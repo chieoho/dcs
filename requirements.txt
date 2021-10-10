@@ -2,3 +2,9 @@ pytest==4.6.11
 SQLAlchemy~=1.4.25
 inspect2
 PyInstaller==2.1
+inspect2==0.1.2
+pyserial==3.5
+pyExcelerator==0.6.4.1
+pywin32==228
+WMI==1.5.1
+xlrd==2.0.1

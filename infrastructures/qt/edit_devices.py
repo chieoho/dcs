@@ -9,7 +9,12 @@ import time
 from PyQt4 import QtCore, QtGui
 from infrastructures.qt.main_window import MainWindow
 from infrastructures.qt.utils import static
-from adapter.adapter import add_device_rows, get_device_rows, modify_device_row
+from adapter.adapter import (
+    add_device_rows,
+    get_device_rows,
+    modify_device_row,
+    delete_devices
+)
 from infrastructures.database.repo import DevRepo
 
 
@@ -22,11 +27,11 @@ class EditDevices(object):
         self.edit_table = self.ui.tableWidget2_1
         self.monitoring_table = self.ui.tableWidget1
 
-        self.ui.addButton.setEnabled(True)
         self.edit_table.setEditTriggers(QtGui.QTableWidget.DoubleClicked)
 
         self.mw.connect(self.ui.addButton, QtCore.SIGNAL('clicked()'), static(self.add_devices))
         self.mw.connect(self.edit_table, QtCore.SIGNAL('cellChanged(int,int)'), self.modify_device)
+        self.mw.connect(self.ui.delButton, QtCore.SIGNAL('clicked()'), static(self.delete_devices))
 
         self.dev_repo = DevRepo()
         self.update_table()
@@ -93,7 +98,20 @@ class EditDevices(object):
         add_device_rows(self.dev_repo, device_values_list)
         self.update_table()
 
-    def modify_device(self, row, column):
+    def modify_device(self, row, column, *args):
+        print(args)
         content = self.mw.get_unicode_content(self.edit_table.item(row, column))
         modify_device_row(self.dev_repo, row, column, content)
         self.update_table()
+
+    def delete_devices(self):
+        reply = QtGui.QMessageBox.question(
+            self.mw,
+            u"删除控制器",
+            u"要删除选定的控制器吗？",
+            QtGui.QMessageBox.Yes | QtGui.QMessageBox.No, QtGui.QMessageBox.No)
+        if reply == QtGui.QMessageBox.Yes:
+            remove_rows = self.mw.get_selected_rows(self.edit_table)
+            _id_list = map(lambda r: r+1, remove_rows )
+            delete_devices(self.dev_repo, _id_list)
+            self.update_table()

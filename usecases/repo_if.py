@@ -17,7 +17,7 @@ class RepoIf(object):
     def modify_device(self, _id, new_device_info):
         pass
 
-    def delete_devices(self, _id):
+    def delete_devices(self, _id_list):
         pass
 
 

@@ -22,3 +22,6 @@ class DevRepo(RepoIf):
 
     def modify_device(self, _id, new_device_info):
         return self.dev_repo.update({"_id": [_id]}, new_device_info)
+
+    def delete_devices(self, _id_list):
+        return self.dev_repo.delete({"_id": _id_list})

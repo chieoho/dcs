@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 """
-@file: test_controller.py
+@file: test_device.py
 @desc:
 @author: Jaden Wu
 @time: 2021/10/1 20:51
 """
-from entities.controller import Controller
+from entities.device import Device
 
 
-def test_controller():
-    d = Controller(code="01", init_state=0)
+def test_device():
+    d = Device(code="01", init_state=0)
     d.set_state(1)
     d.set_state(2)
     assert d.current_state == 2

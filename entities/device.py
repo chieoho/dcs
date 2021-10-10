@@ -7,7 +7,7 @@
 """
 
 
-class Controller(object):
+class Device(object):
     """
     接入系统的控制器对系统来说是一种接入设备
     """

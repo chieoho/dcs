@@ -253,7 +253,7 @@ class MainWindow(QtGui.QMainWindow):
         self.ui.deinfoButton.setStyleSheet(self.activeStateColor)
 
         # self.ui.addButton.setEnabled(False)
-        self.ui.delButton.setEnabled(False)
+        # self.ui.delButton.setEnabled(False)
         self.ui.lineEdit.setEnabled(False)
         self.ui.tableWidget2_1.setSelectionBehavior(QtGui.QTableWidget.SelectRows)
         # self.ui.tableWidget2_1.setEditTriggers(QtGui.QTableWidget.NoEditTriggers)

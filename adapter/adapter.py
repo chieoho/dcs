@@ -9,6 +9,7 @@ from datetime import datetime
 from usecases.add_devices import add_devices, device_fields
 from usecases.get_devices import get_devices
 from usecases.modify_device import modify_device
+from usecases.delete_devices import delete_devices
 
 
 def add_device_rows(repo, row_content_list):
@@ -37,4 +38,9 @@ def modify_device_row(repo, row, col, content):
     _id = row + 1
     new_device_info = {device_fields[col]: content}
     res = modify_device(repo, _id, new_device_info)
+    return res
+
+
+def delete_device_rows(repo, rows):
+    res = delete_devices(repo, rows)
     return res
