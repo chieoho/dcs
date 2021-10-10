@@ -256,7 +256,7 @@ class MainWindow(QtGui.QMainWindow):
         self.ui.delButton.setEnabled(False)
         self.ui.lineEdit.setEnabled(False)
         self.ui.tableWidget2_1.setSelectionBehavior(QtGui.QTableWidget.SelectRows)
-        self.ui.tableWidget2_1.setEditTriggers(QtGui.QTableWidget.NoEditTriggers)
+        # self.ui.tableWidget2_1.setEditTriggers(QtGui.QTableWidget.NoEditTriggers)
 
         self.ui.waddButton.setEnabled(False)
         self.ui.wdelButton.setEnabled(False)
@@ -339,3 +339,23 @@ class MainWindow(QtGui.QMainWindow):
             QtGui.QMainWindow.close(self)
         elif reply == QtGui.QMessageBox.No:
             pass
+
+    @staticmethod
+    def get_unicode_content(table_index):
+        try:
+            content = table_index.text().toLocal8Bit()
+            content = unicode(content, 'gbk', 'ignore')
+            return content
+        except Exception as e:
+            print(e)
+
+    @staticmethod
+    def get_selected_rows(table_widget):
+        rows = []
+        for index in table_widget.selectedIndexes():
+            if index.column() == 0:
+                rows.append(index.row())
+        rows = list(set(rows))  # 去除重复元素
+        rows.sort()  # 升序
+        rows.reverse()  # 颠倒
+        return rows

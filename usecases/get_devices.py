@@ -8,7 +8,7 @@
 from usecases.repo_if import repo_if
 
 
-def get_controllers(repo):
+def get_devices(repo):
     repo = repo if repo else repo_if
-    controller_list = repo.get_controllers()
-    return controller_list
+    device_list = repo.get_devices()
+    return device_list

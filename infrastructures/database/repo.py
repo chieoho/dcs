@@ -14,8 +14,11 @@ class DevRepo(RepoIf):
     def __init__(self):
         self.dev_repo = CRUD(CtrlDev)
 
-    def add_controllers(self, controller_list):
-        return self.dev_repo.add(controller_list)
+    def add_devices(self, device_list):
+        return self.dev_repo.add(device_list)
 
-    def get_controllers(self):
+    def get_devices(self):
         return self.dev_repo.query({})
+
+    def modify_device(self, _id, new_device_info):
+        return self.dev_repo.update({"_id": [_id]}, new_device_info)

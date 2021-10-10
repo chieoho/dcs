@@ -19,6 +19,11 @@ class CRUD:
         self.session.close()
 
     def add(self, records):
+        """
+        往table添加多条记录
+        :param records: 记录信息列表
+        :return: 成功返回True，失败返回False
+        """
         for r in records:
             new_record = self.model(**r)
             self.session.add(new_record)
@@ -39,8 +44,8 @@ class CRUD:
     def _gen_query_condition(search_keys_dict, key_column_list):
         condition = []
         for key, column in key_column_list:
-            condition.append(or_(*list(map(lambda k: column.like('%{}%'.format(k)),
-                                           search_keys_dict.get(key, [])))))
+            condition.append(or_(*(map(lambda k: column == k,
+                                       search_keys_dict.get(key, [])))))
         return condition
 
     def _query(self, model, cond):
@@ -53,6 +58,13 @@ class CRUD:
         return query_obj
 
     def query(self, cond, ret_columns=()):
+        """
+        返回table中符合条件的记录
+        :param cond: 条件  如： {"year": ["2001", "2002"], "security_classification": [1]}
+                               表示年度为2001或2002且密级为1的记录
+        :param ret_columns: 指定返回列，为空时返回全部列  如：("verify_state", "recog_state")
+        :return: 记录列表
+        """
         if all(cond.values()):
             row2dict = partial(self.row2dict, col_names=ret_columns)
             query_obj = self._query(self.model, cond)
@@ -61,6 +73,13 @@ class CRUD:
         return []
 
     def update(self, cond, new_info):
+        """
+        更新table中符合条件的记录
+        :param cond: 条件  如： {"year": ["2001", "2002"], "security_classification": [1]}
+                              表示年度为2001或2002且密级为1的记录
+        :param new_info: 需更新的字段及对应值
+        :return: 成功返回True，失败返回False
+        """
         query_obj = self._query(self.model, cond)
         for r in query_obj:
             for k, v in new_info.items():
@@ -69,6 +88,12 @@ class CRUD:
         return True
 
     def delete(self, cond):
+        """
+        删除table中符合条件的记录
+        :param cond: 条件  如： {"year": ["2001", "2002"], "security_classification": [1]}
+                              表示年度为2001或2002且密级为1的记录
+        :return: 成功返回True，失败返回False
+        """
         query_obj = self._query(self.model, cond)
         for r in query_obj:
             self.session.delete(r)

@@ -8,16 +8,16 @@
 
 
 class RepoIf(object):
-    def add_controllers(self, controller_list):
+    def add_devices(self, device_list):
         pass
 
-    def get_controllers(self):
+    def get_devices(self):
         pass
 
-    def delete_controllers(self, id_list):
+    def modify_device(self, _id, new_device_info):
         pass
 
-    def modify_controllers(self, _id, controller_info):
+    def delete_devices(self, _id):
         pass
 
 

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-@file: controller.py
+@file: adapter.py
 @desc:
 @author: Jaden Wu
 @time: 2021/10/1 20:41
