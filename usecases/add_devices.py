@@ -7,6 +7,8 @@
 """
 from usecases.repo_if import repo_if
 
+
+device_id = "_id"
 device_fields = (
     "area",
     "code",

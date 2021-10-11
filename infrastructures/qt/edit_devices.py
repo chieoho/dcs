@@ -13,7 +13,7 @@ from adapter.adapter import (
     add_device_rows,
     get_device_rows,
     modify_device_row,
-    delete_devices
+    delete_device_rows
 )
 from infrastructures.database.repo import DevRepo
 
@@ -98,8 +98,7 @@ class EditDevices(object):
         add_device_rows(self.dev_repo, device_values_list)
         self.update_table()
 
-    def modify_device(self, row, column, *args):
-        print(args)
+    def modify_device(self, row, column):
         content = self.mw.get_unicode_content(self.edit_table.item(row, column))
         modify_device_row(self.dev_repo, row, column, content)
         self.update_table()
@@ -112,6 +111,5 @@ class EditDevices(object):
             QtGui.QMessageBox.Yes | QtGui.QMessageBox.No, QtGui.QMessageBox.No)
         if reply == QtGui.QMessageBox.Yes:
             remove_rows = self.mw.get_selected_rows(self.edit_table)
-            _id_list = map(lambda r: r+1, remove_rows )
-            delete_devices(self.dev_repo, _id_list)
+            delete_device_rows(self.dev_repo, remove_rows)
             self.update_table()

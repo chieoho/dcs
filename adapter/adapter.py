@@ -6,10 +6,13 @@
 @time: 2021/10/10 8:45
 """
 from datetime import datetime
-from usecases.add_devices import add_devices, device_fields
+from usecases.add_devices import add_devices, device_fields, device_id
 from usecases.get_devices import get_devices
 from usecases.modify_device import modify_device
 from usecases.delete_devices import delete_devices
+
+
+devices = []
 
 
 def add_device_rows(repo, row_content_list):
@@ -24,7 +27,8 @@ def add_device_rows(repo, row_content_list):
 
 
 def get_device_rows(repo):
-    devices = get_devices(repo)
+    del devices[:]
+    devices.extend(get_devices(repo))
     all_records = []
     for dev in devices:
         area, code, detector_num, install_time, phone_num_1, phone_num_2, phone_num_3, phone_num_4 \
@@ -35,12 +39,13 @@ def get_device_rows(repo):
 
 
 def modify_device_row(repo, row, col, content):
-    _id = row + 1
+    _id = devices[row][device_id]
     new_device_info = {device_fields[col]: content}
     res = modify_device(repo, _id, new_device_info)
     return res
 
 
 def delete_device_rows(repo, rows):
-    res = delete_devices(repo, rows)
+    _id_list = map(lambda r: devices[r][device_id], rows)
+    res = delete_devices(repo, _id_list)
     return res
