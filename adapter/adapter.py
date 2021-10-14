@@ -6,7 +6,7 @@
 @time: 2021/10/10 8:45
 """
 from datetime import datetime
-from usecases.add_devices import add_devices, device_fields, device_id
+from usecases.add_devices import AddDevicesCase, device_fields, device_id
 from usecases.get_devices import get_devices
 from usecases.modify_device import modify_device
 from usecases.delete_devices import delete_devices
@@ -22,7 +22,7 @@ def add_device_rows(repo, row_content_list):
         install_time = datetime.now()
         device_values_list.append([area, code, int(detector_num), install_time,
                                    phone_num_1, phone_num_2, phone_num_3, phone_num_4])
-    add_res = add_devices(repo, device_values_list)
+    add_res = AddDevicesCase(repo).add_devices(device_values_list)
     return add_res
 
 

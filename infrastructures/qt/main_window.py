@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
+import string
+import time
+
 from PyQt4 import QtCore, QtGui
 from infrastructures.qt.ui.dcs_ui import Ui_MainWindow
+from half2full import half2full
 
 
 buttonStyleSheet = '''
@@ -252,11 +256,11 @@ class MainWindow(QtGui.QMainWindow):
         self.ui.controlButton.setStyleSheet(buttonStyleSheet)
         self.ui.deinfoButton.setStyleSheet(self.activeStateColor)
 
-        # self.ui.addButton.setEnabled(False)
-        # self.ui.delButton.setEnabled(False)
+        self.ui.addButton.setEnabled(False)
+        self.ui.delButton.setEnabled(False)
         self.ui.lineEdit.setEnabled(False)
         self.ui.tableWidget2_1.setSelectionBehavior(QtGui.QTableWidget.SelectRows)
-        # self.ui.tableWidget2_1.setEditTriggers(QtGui.QTableWidget.NoEditTriggers)
+        self.ui.tableWidget2_1.setEditTriggers(QtGui.QTableWidget.NoEditTriggers)
 
         self.ui.waddButton.setEnabled(False)
         self.ui.wdelButton.setEnabled(False)
@@ -359,3 +363,16 @@ class MainWindow(QtGui.QMainWindow):
         rows.sort()  # 升序
         rows.reverse()  # 颠倒
         return rows
+
+    def write_text(self, content, color=QtGui.QColor(0, 255, 0)):
+        for ch in string.digits+string.letters:
+            content = content.replace(ch, half2full(ch))
+        equ_len_content = content+u'　'*(14-len(content))  # 空格是全角
+        now_time = time.strftime('%Y-%m-%d %H:%M:%S')
+        self.ui.textBrowser.setTextColor(color)
+        work_info = equ_len_content + '\n' + now_time + u'；' + '\n'
+        self.ui.textBrowser.append(work_info)
+        self.textBrowservsb.setValue(self.textBrowservsb.maximum())
+        with open('工作信息/工作信息_%s.txt' % self.start_time, 'a') as f:
+            f.write(work_info.encode('utf-8') + '\n')
+        return now_time
