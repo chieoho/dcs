@@ -9,7 +9,7 @@
 
 class Device(object):
     """
-    接入系统的控制器对系统来说是一种接入设备
+    直接接入系统的设备
     """
     def __init__(self, code, init_state):
         self.code = code

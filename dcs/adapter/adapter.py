@@ -8,8 +8,8 @@
 from datetime import datetime
 from dcs.usecases.add_devices import AddDevicesCase, device_fields, device_id
 from dcs.usecases.get_devices import get_devices
-from dcs.usecases import modify_device
-from dcs.usecases.delete_devices import delete_devices
+from dcs.usecases.modify_device import ModifyDeviceCase
+from dcs.usecases.delete_devices import DeleteDevicesCase
 
 
 devices = []
@@ -41,11 +41,11 @@ def get_device_rows(repo):
 def modify_device_row(repo, row, col, content):
     _id = devices[row][device_id]
     new_device_info = {device_fields[col]: content}
-    res = modify_device(repo, _id, new_device_info)
+    res = ModifyDeviceCase(repo).modify_device(_id, new_device_info)
     return res
 
 
 def delete_device_rows(repo, rows):
     _id_list = map(lambda r: devices[r][device_id], rows)
-    res = delete_devices(repo, _id_list)
+    res = DeleteDevicesCase(repo).delete_devices(_id_list)
     return res

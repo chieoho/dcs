@@ -8,9 +8,12 @@
 from dcs.usecases.repo_if import repo_if
 
 
-def delete_devices(repo, _id_list):
-    """
-    """
-    repo = repo if repo else repo_if
-    res = repo.delete_devices(_id_list)
-    return res
+class DeleteDevicesCase(object):
+    def __init__(self, repo):
+        self.repo = repo if repo else repo_if
+
+    def delete_devices(self, _id_list):
+        """
+        """
+        res = self.repo.delete_devices(_id_list)
+        return res
