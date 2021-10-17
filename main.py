@@ -3,8 +3,8 @@ import sys
 from PyQt4 import QtGui
 from PyQt4.QtGui import QApplication
 from PyQt4.QtCore import Qt
-from infrastructures.qt.main_window import MainWindow
-from infrastructures.qt.edit_devices import EditDevices
+from dcs.infrastructures.qt.main_window import MainWindow
+from dcs.infrastructures.qt.edit_devices import EditDevices
 
 
 def main():

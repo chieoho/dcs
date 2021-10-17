@@ -5,7 +5,7 @@
 @author: Jaden Wu
 @time: 2021/10/1 20:51
 """
-from entities.device import Device
+from dcs.entities.device import Device
 
 
 def test_device():

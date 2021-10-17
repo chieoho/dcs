@@ -5,9 +5,9 @@
 @author: Jaden Wu
 @time: 2021/10/5 8:42
 """
-from usecases.repo_if import RepoIf
-from infrastructures.database.model import CtrlDev
-from infrastructures.database.crud import CRUD
+from dcs.usecases.repo_if import RepoIf
+from dcs.infrastructures.database.model import CtrlDev
+from dcs.infrastructures.database.crud import CRUD
 
 
 class DevRepo(RepoIf):

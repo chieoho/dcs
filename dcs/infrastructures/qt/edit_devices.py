@@ -9,15 +9,15 @@ import time
 import re
 
 from PyQt4 import QtCore, QtGui
-from infrastructures.qt.main_window import MainWindow
-from infrastructures.qt.utils import static
-from adapter.adapter import (
+from dcs.infrastructures.qt.main_window import MainWindow
+from dcs.infrastructures.qt.utils import static
+from dcs.adapter.adapter import (
     add_device_rows,
     get_device_rows,
     modify_device_row,
     delete_device_rows
 )
-from infrastructures.database.repo import DevRepo
+from dcs.infrastructures.database.repo import DevRepo
 
 
 class EditDevices(object):

@@ -6,10 +6,10 @@
 @time: 2021/10/10 8:45
 """
 from datetime import datetime
-from usecases.add_devices import AddDevicesCase, device_fields, device_id
-from usecases.get_devices import get_devices
-from usecases.modify_device import modify_device
-from usecases.delete_devices import delete_devices
+from dcs.usecases.add_devices import AddDevicesCase, device_fields, device_id
+from dcs.usecases.get_devices import get_devices
+from dcs.usecases import modify_device
+from dcs.usecases.delete_devices import delete_devices
 
 
 devices = []

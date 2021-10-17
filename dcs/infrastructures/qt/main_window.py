@@ -3,7 +3,7 @@ import string
 import time
 
 from PyQt4 import QtCore, QtGui
-from infrastructures.qt.ui.dcs_ui import Ui_MainWindow
+from dcs.infrastructures.qt.ui.dcs_ui import Ui_MainWindow
 from half2full import half2full
 
 

@@ -6,7 +6,7 @@
 @time: 2021/10/4 21:54
 """
 from sqlalchemy import Column, Integer, String, DateTime
-from infrastructures.database import Base
+from dcs.infrastructures.database import Base
 
 
 class CtrlDev(Base):

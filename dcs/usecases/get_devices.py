@@ -5,7 +5,7 @@
 @author: Jaden Wu
 @time: 2021/10/4 16:53
 """
-from usecases.repo_if import repo_if
+from dcs.usecases.repo_if import repo_if
 
 
 def get_devices(repo):

@@ -5,7 +5,7 @@
 @author: Jaden Wu
 @time: 2021/10/10 15:56
 """
-from usecases.repo_if import repo_if
+from dcs.usecases.repo_if import repo_if
 
 
 def modify_device(repo, _id, new_device_info):

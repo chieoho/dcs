@@ -5,7 +5,7 @@
 @author: Jaden Wu
 @time: 2021/10/10 21:19
 """
-from usecases.repo_if import repo_if
+from dcs.usecases.repo_if import repo_if
 
 
 def delete_devices(repo, _id_list):
