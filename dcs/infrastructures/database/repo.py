@@ -12,16 +12,16 @@ from dcs.infrastructures.database.crud import CRUD
 
 class DevRepo(RepoIf):
     def __init__(self):
-        self.dev_repo = CRUD(CtrlDev)
+        self.dev_crud = CRUD(CtrlDev)
 
     def add_devices(self, device_list):
-        return self.dev_repo.add(device_list)
+        return self.dev_crud.add(device_list)
 
     def get_devices(self):
-        return self.dev_repo.query({})
+        return self.dev_crud.query({})
 
     def modify_device(self, _id, new_device_info):
-        return self.dev_repo.update({"_id": [_id]}, new_device_info)
+        return self.dev_crud.update({"_id": [_id]}, new_device_info)
 
     def delete_devices(self, _id_list):
-        return self.dev_repo.delete({"_id": _id_list})
+        return self.dev_crud.delete({"_id": _id_list})

@@ -1,6 +1,5 @@
 pytest==4.6.11
 SQLAlchemy~=1.4.25
-inspect2
 PyInstaller==2.1
 inspect2==0.1.2
 pyserial==3.5

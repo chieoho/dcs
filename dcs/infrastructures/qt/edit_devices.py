@@ -11,12 +11,7 @@ import re
 from PyQt4 import QtCore, QtGui
 from dcs.infrastructures.qt.main_window import MainWindow
 from dcs.infrastructures.qt.utils import static
-from dcs.adapter.adapter import (
-    add_device_rows,
-    get_device_rows,
-    modify_device_row,
-    delete_device_rows
-)
+from dcs.adapter.devices_view import DevicesController
 from dcs.infrastructures.database.repo import DevRepo
 
 
@@ -39,15 +34,13 @@ class EditDevices(object):
         self.mw.connect(self.device_edit_table, QtCore.SIGNAL('cellDoubleClicked(int, int)'),
                         self.get_select_ctrller_for_edit)
 
-        self.dev_repo = DevRepo()
-        self.update_device_table()
+        self.dev_controller = DevicesController(DevRepo(), self)
+        self.dev_controller.update_edit_table()
 
-    def update_device_table(self):
-        all_records = get_device_rows(self.dev_repo)
+    def update_edit_table(self, all_records):
         self.mw.disconnect(self.device_edit_table, QtCore.SIGNAL('cellChanged(int,int)'), self.modify_device)
         self.update_table(self.device_edit_table, all_records)
         self.mw.connect(self.device_edit_table, QtCore.SIGNAL('cellChanged(int,int)'), self.modify_device)
-        self.update_table(self.device_monitoring_table, all_records)
 
     @staticmethod
     def update_table(table, all_records):
@@ -97,13 +90,13 @@ class EditDevices(object):
                 phone_num_4
             ]
             device_values_list.append(row_content)
-        add_device_rows(self.dev_repo, device_values_list)
-        self.update_device_table()
+        self.dev_controller.add_device_rows(device_values_list)
+        self.dev_controller.update_edit_table()
 
     def modify_device(self, row, column):
         content = self.mw.get_unicode_content(self.device_edit_table.item(row, column))
-        modify_device_row(self.dev_repo, row, column, content)
-        self.update_device_table()
+        self.dev_controller.modify_device_row(row, column, content)
+        self.dev_controller.update_edit_table()
 
     def delete_devices(self):
         reply = QtGui.QMessageBox.question(
@@ -113,8 +106,8 @@ class EditDevices(object):
             QtGui.QMessageBox.Yes | QtGui.QMessageBox.No, QtGui.QMessageBox.No)
         if reply == QtGui.QMessageBox.Yes:
             remove_rows = self.mw.get_selected_rows(self.device_edit_table)
-            delete_device_rows(self.dev_repo, remove_rows)
-            self.update_device_table()
+            self.dev_controller.delete_device_rows(remove_rows)
+            self.dev_controller.update_edit_table()
 
     def edit_device_enable(self):
         reply = QtGui.QMessageBox.question(
