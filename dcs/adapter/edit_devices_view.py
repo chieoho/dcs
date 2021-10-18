@@ -25,6 +25,9 @@ class EditDevicesModel(object):
             self.edit_devices_list.append([area, code, str(detector_num), str(install_time.date()),
                                            phone_num_1, phone_num_2, phone_num_3, phone_num_4])
 
+    def get_devices(self):
+        return self.edit_devices_list
+
 
 class EditDevicesController(object):
     def __init__(self, repo, view):
@@ -42,14 +45,16 @@ class EditDevicesController(object):
 
     def _update_edit_table(self):
         self._fetch_devices_from_db()
-        self.view.update_edit_table(self.edit_devices_model.edit_devices_list)
+        edit_devices_list = self.edit_devices_model.get_devices()
+        self.view.update_edit_table(edit_devices_list)
 
     def add_device_rows(self, row_content_list):
         device_values_list = []
         for row_content in row_content_list:
-            area, code, detector_num, _, phone_num_1, phone_num_2, phone_num_3, phone_num_4 = row_content
-            install_time = datetime.now()
-            device_values_list.append([area, code, int(detector_num), install_time,
+            area, code, detector_num, install_time, phone_num_1, phone_num_2, phone_num_3, phone_num_4 = row_content
+            detector_num = int(detector_num)
+            install_time = datetime.strptime(install_time, "%Y-%m-%d")
+            device_values_list.append([area, code, detector_num, install_time,
                                        phone_num_1, phone_num_2, phone_num_3, phone_num_4])
         add_res = AddDevicesCase(self.repo).add_devices(device_values_list)
         self._update_edit_table()

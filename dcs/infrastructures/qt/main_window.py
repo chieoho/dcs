@@ -1,10 +1,6 @@
 # -*- coding: utf-8 -*-
-import string
-import time
-
 from PyQt4 import QtCore, QtGui
 from dcs.infrastructures.qt.ui.dcs_ui import Ui_MainWindow
-from half2full import half2full
 
 
 buttonStyleSheet = '''
@@ -343,36 +339,3 @@ class MainWindow(QtGui.QMainWindow):
             QtGui.QMainWindow.close(self)
         elif reply == QtGui.QMessageBox.No:
             pass
-
-    @staticmethod
-    def get_unicode_content(table_index):
-        try:
-            content = table_index.text().toLocal8Bit()
-            content = unicode(content, 'gbk', 'ignore')
-            return content
-        except Exception as e:
-            print(e)
-
-    @staticmethod
-    def get_selected_rows(table_widget):
-        rows = []
-        for index in table_widget.selectedIndexes():
-            if index.column() == 0:
-                rows.append(index.row())
-        rows = list(set(rows))  # 去除重复元素
-        rows.sort()  # 升序
-        rows.reverse()  # 颠倒
-        return rows
-
-    def write_text(self, content, color=QtGui.QColor(0, 255, 0)):
-        for ch in string.digits+string.letters:
-            content = content.replace(ch, half2full(ch))
-        equ_len_content = content+u'　'*(14-len(content))  # 空格是全角
-        now_time = time.strftime('%Y-%m-%d %H:%M:%S')
-        self.ui.textBrowser.setTextColor(color)
-        work_info = equ_len_content + '\n' + now_time + u'；' + '\n'
-        self.ui.textBrowser.append(work_info)
-        self.textBrowservsb.setValue(self.textBrowservsb.maximum())
-        with open('工作信息/工作信息_%s.txt' % self.start_time, 'a') as f:
-            f.write(work_info.encode('utf-8') + '\n')
-        return now_time
