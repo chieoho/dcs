@@ -15,15 +15,23 @@ from dcs.usecases.delete_devices import DeleteDevicesCase
 
 class EditDevicesModel(object):
     def __init__(self):
+        self.fields_convert_map = {
+            "area": lambda i: i,
+            "code": lambda i: i,
+            "detector_num": str,
+            "install_time": lambda it: str(it.date()),
+            "phone_num_1": lambda i: i,
+            "phone_num_2": lambda i: i,
+            "phone_num_3": lambda i: i,
+            "phone_num_4": lambda i: i
+        }
         self.edit_devices_list = []
 
-    def set_devices(self, devices):
+    def set_devices(self, devices_from_db):
         del self.edit_devices_list[:]
-        for dev in devices:
-            area, code, detector_num, install_time, phone_num_1, phone_num_2, phone_num_3, phone_num_4 \
-                = map(lambda k: dev[k], device_fields)
-            self.edit_devices_list.append([area, code, str(detector_num), str(install_time.date()),
-                                           phone_num_1, phone_num_2, phone_num_3, phone_num_4])
+        for dev in devices_from_db:
+            dev_view = map(lambda k: self.fields_convert_map[k](dev[k]), device_fields)
+            self.edit_devices_list.append(dev_view)
 
     def get_devices(self):
         return self.edit_devices_list
