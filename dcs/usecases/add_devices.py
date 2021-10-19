@@ -17,7 +17,7 @@ device_fields = (
     "phone_num_1",
     "phone_num_2",
     "phone_num_3",
-    "phone_num_4",
+    "phone_num_4"
 )
 
 
