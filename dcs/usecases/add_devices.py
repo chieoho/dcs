@@ -25,14 +25,11 @@ class AddDevicesCase:
     def __init__(self, repo):
         self.repo = repo if repo else repo_if
 
-    def add_devices(self, device_values_list):
+    def add_devices(self, device_list):
         """
         添加设备
-        :param device_values_list: 设备字段值元组构成的列表
+        :param device_list: 设备字段值元组构成的列表
         :return:
         """
-        device_list = []
-        for device_values in device_values_list:
-            device_list.append(dict(zip(device_fields, device_values)))
         add_res = self.repo.add_devices(device_list)
         return add_res

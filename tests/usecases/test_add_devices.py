@@ -20,6 +20,6 @@ class Repo(object):
 def test_add_devices():
     case = AddDevicesCase(Repo())
     device_values = [None] * len(device_fields)
-    device_values_list = [device_values]
+    device_values_list = [dict(zip(device_fields, device_values))]
     add_res = case.add_devices(device_values_list)
     assert add_res is True

@@ -5,12 +5,21 @@
 @author: Jaden Wu
 @time: 2021/10/17 11:03
 """
-from dcs.usecases.add_devices import device_id
+from dcs.usecases.add_devices import device_id, device_fields
 from dcs.usecases.repo_if import RepoIf
 from dcs.adapter.edit_devices_view import EditDevicesController
 
 
-add_row_content = [u"A区", "16", "1", "2021-10-17", "", "", "", ""]
+add_row_content = {
+    "area": u"A区",
+    "code": "16",
+    "detector_num": "1",
+    "install_time": "2021-10-17",
+    "phone_num_1": "",
+    "phone_num_2": "",
+    "phone_num_3": "",
+    "phone_num_4": ""
+}
 
 
 class EditDevicesView(object):
@@ -67,7 +76,7 @@ def test_controller_modify_dev():
     controller.add_device_rows(row_content_list)
     res = controller.modify_device_row(0, modify_col, new_value)
     assert res is True
-    assert view.view_data[0][modify_col] == new_value
+    assert view.view_data[0][device_fields[modify_col]] == new_value
 
 
 def test_controller_delete_dev():
