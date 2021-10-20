@@ -6,7 +6,7 @@
 @time: 2021/10/17 11:03
 """
 from dcs.usecases.add_devices import device_id, device_fields
-from dcs.usecases.repo_if import RepoIf
+from dcs.usecases.repo_if import DevRepoIf
 from dcs.adapter.edit_devices_view import EditDevicesController
 
 
@@ -30,7 +30,7 @@ class EditDevicesView(object):
         self.view_data = edit_devices_list
 
 
-class Repo(RepoIf):
+class Repo(DevRepoIf):
     def __init__(self):
         self.devices = []
 

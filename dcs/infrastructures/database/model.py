@@ -20,3 +20,8 @@ class CtrlDev(Base):
     phone_num_2 = Column(String(11))
     phone_num_3 = Column(String(11))
     phone_num_4 = Column(String(11))
+
+
+class Detector(Base):
+    __tablename__ = "detector"
+    _id = Column(Integer, primary_key=True)

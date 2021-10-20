@@ -7,7 +7,7 @@
 """
 
 
-class RepoIf(object):
+class DevRepoIf(object):
     def add_devices(self, device_list):
         pass
 
@@ -21,4 +21,19 @@ class RepoIf(object):
         pass
 
 
-repo_if = RepoIf()
+class DetRepoIf(object):
+    def add_detectors(self, detector_list):
+        pass
+
+    def get_detectors(self):
+        pass
+
+    def modify_detector(self, _id, new_detector_info):
+        pass
+
+    def delete_detectors(self, _id_list):
+        pass
+
+
+dev_repo_if = DevRepoIf()
+det_repo_if = DetRepoIf()

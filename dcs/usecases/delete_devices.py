@@ -5,12 +5,12 @@
 @author: Jaden Wu
 @time: 2021/10/10 21:19
 """
-from dcs.usecases.repo_if import repo_if
+from dcs.usecases.repo_if import dev_repo_if
 
 
 class DeleteDevicesCase(object):
     def __init__(self, repo):
-        self.repo = repo if repo else repo_if
+        self.repo = repo if repo else dev_repo_if
 
     def delete_devices(self, _id_list):
         """

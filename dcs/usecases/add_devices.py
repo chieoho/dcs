@@ -5,7 +5,7 @@
 @author: Jaden Wu
 @time: 2021/10/2 15:31
 """
-from dcs.usecases.repo_if import repo_if
+from dcs.usecases.repo_if import dev_repo_if
 
 
 device_id = "_id"
@@ -23,12 +23,12 @@ device_fields = (
 
 class AddDevicesCase:
     def __init__(self, repo):
-        self.repo = repo if repo else repo_if
+        self.repo = repo if repo else dev_repo_if
 
     def add_devices(self, device_list):
         """
         添加设备
-        :param device_list: 设备字段值元组构成的列表
+        :param device_list: 字典列表
         :return:
         """
         add_res = self.repo.add_devices(device_list)
