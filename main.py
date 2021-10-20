@@ -5,6 +5,7 @@ from PyQt4.QtGui import QApplication
 from PyQt4.QtCore import Qt
 from dcs.infrastructures.qt.main_window import MainWindow
 from dcs.infrastructures.qt.edit_devices import EditDevices
+from dcs.infrastructures.qt.edit_detectors import EditDetectors
 
 
 def main():
@@ -13,6 +14,7 @@ def main():
 
     main_win = MainWindow()
     EditDevices(main_win)
+    EditDetectors(main_win)
 
     main_win.setWindowFlags(Qt.CustomizeWindowHint | Qt.FramelessWindowHint)  # 去掉标题栏
     app.setFont(QApplication.font())

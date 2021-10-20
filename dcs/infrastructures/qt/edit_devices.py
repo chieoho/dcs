@@ -44,6 +44,8 @@ class EditDevices(object):
         self.mw.connect(self.device_edit_table, QtCore.SIGNAL('cellChanged(int,int)'), self.modify_device)
         self.mw.connect(self.ui.delButton, QtCore.SIGNAL('clicked()'), static(self.delete_devices))
         self.mw.connect(self.ui.editButton, QtCore.SIGNAL('clicked()'), static(self.edit_device_enable))
+        self.mw.connect(self.device_edit_table, QtCore.SIGNAL('cellDoubleClicked(int, int)'),
+                        self.get_select_controller_for_edit)
 
         self.edit_dev_controller = EditDevicesController(DevRepo(), self)  # 放在最后
 
@@ -105,3 +107,16 @@ class EditDevices(object):
             self.ui.lineEdit.setEnabled(False)
             self.device_edit_table.setSelectionBehavior(QtGui.QTableWidget.SelectRows)
             self.device_edit_table.setEditTriggers(QtGui.QTableWidget.NoEditTriggers)
+
+    def get_select_controller_for_edit(self, row):
+        if self.ui.addButton.isEnabled():  # 控制器编辑状态下不跳转
+            return
+        controller_num = get_unicode_content(self.device_edit_table.item(row, 1))
+        monitor_region = get_unicode_content(self.device_edit_table.item(row, 0))
+        self.ui.tabWidget2.setTabText(1, monitor_region + '-' + controller_num + u'控制器')
+        self.ui.tabWidget2.setCurrentIndex(1)
+
+        self.ui.weditButton.setEnabled(True)
+        self.ui.readButton.setEnabled(True)
+        self.ui.importexctrlButton.setEnabled(True)
+        self.ui.exportexctrlButton.setEnabled(True)
