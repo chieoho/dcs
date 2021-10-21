@@ -25,3 +25,11 @@ class CtrlDev(Base):
 class Detector(Base):
     __tablename__ = "detector"
     _id = Column(Integer, primary_key=True)
+    area = Column(String(32))
+    controller_code = Column(String(16))
+    address_code = Column(String(16))
+    position = Column(String(128))
+    decimal_point = Column(Integer)
+    material = Column(String(16))
+    unit = Column(String(16))
+    install_time = Column(DateTime)

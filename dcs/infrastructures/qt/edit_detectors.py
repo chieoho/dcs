@@ -53,19 +53,23 @@ class EditDetectors(object):
         self.mw.connect(self.detector_edit_table, QtCore.SIGNAL('cellChanged(int,int)'), self.modify_detector)
 
     def add_detectors(self):
+        content = self.ui.tabWidget2.tabText(1).toLocal8Bit()
+        content = unicode(content, 'gbk', 'ignore')
+        area = '-'.join(content.split('-')[0: -1])
+        controller_code = content.split('-')[-1][0: 2]
         detector_qty = int(self.ui.lineEdit.text())
         row_cnt = self.detector_edit_table.rowCount()
         detector_values_list = []
         for i in range(row_cnt, row_cnt + detector_qty):
             row_content = [
-                u"A区",
+                area,
+                controller_code,
+                "8001",
                 "0" * (2 - len(str(i + 1))) + str(i + 1),
                 "1",
-                time.strftime("%Y-%m-%d"),
-                " ",
-                " ",
-                " ",
-                " "
+                u'甲烷',
+                "%LEL",
+                time.strftime("%Y-%m-%d")
             ]
             detector_values_list.append(dict(zip(self.det_edit_fields, row_content)))
         self.edit_det_controller.add_detector_rows(detector_values_list)

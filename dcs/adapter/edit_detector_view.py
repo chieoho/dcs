@@ -29,6 +29,17 @@ def identity(item):
     return item
 
 
+edit_det_view_fields = (
+    "area",
+    "address_code",
+    "position",
+    "decimal_point",
+    "material",
+    "unit",
+    "install_time"
+)
+
+
 class EditDetectorsController(object):
     def __init__(self, repo, view):
         self.repo = repo
@@ -43,7 +54,7 @@ class EditDetectorsController(object):
         self.detectors_from_repo.extend(detectors_from_repo)
         edit_detectors_list = []
         for dev in self.detectors_from_repo:
-            edit_detectors_list.append({k: to_view.get(k, identity)(dev[k]) for k in detector_fields})
+            edit_detectors_list.append({k: to_view.get(k, identity)(dev[k]) for k in edit_det_view_fields})
         self.view.update_edit_table(edit_detectors_list)
 
     def add_detector_rows(self, row_content_list):

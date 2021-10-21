@@ -11,6 +11,7 @@ from dcs.usecases.repo_if import det_repo_if
 detector_id = "_id"
 detector_fields = (
     "area",
+    "controller_code",
     "address_code",
     "position",
     "decimal_point",
