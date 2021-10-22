@@ -29,28 +29,16 @@ def identity(item):
     return item
 
 
-class EditDeviceModel(object):
-    def __init__(self,
-                 area,
-                 code,
-                 detector_num,
-                 install_time,
-                 phone_num_1,
-                 phone_num_2,
-                 phone_num_3,
-                 phone_num_4
-                 ):
-        self.area = area
-        self.code = code
-        self.detector_num = detector_num
-        self.install_time = install_time
-        self.phone_num_1 = phone_num_1
-        self.phone_num_2 = phone_num_2
-        self.phone_num_3 = phone_num_3
-        self.phone_num_4 = phone_num_4
-
-    def to_dict(self):
-        return self.__dict__
+edit_dev_model = (
+    "area",
+    "code",
+    "detector_num",
+    "install_time",
+    "phone_num_1",
+    "phone_num_2",
+    "phone_num_3",
+    "phone_num_4"
+)
 
 
 class EditDevicesController(object):
@@ -67,15 +55,14 @@ class EditDevicesController(object):
         self.devices_from_repo.extend(devices_from_repo)
         edit_devices_list = []
         for dev in self.devices_from_repo:
-            edit_devices_list.append({k: to_view.get(k, identity)(dev[k]) for k in device_fields})
+            edit_devices_list.append({k: to_view.get(k, identity)(dev[k]) for k in edit_dev_model})
         self.view.update_edit_table(edit_devices_list)
 
     def add_device_rows(self, row_content_list):
         device_values_list = []
         for row_content in row_content_list:
-            device_info = {k: to_case.get(k, identity)(row_content[k]) for k in device_fields}
-            device_model = EditDeviceModel(**device_info)
-            device_values_list.append(device_model.to_dict())
+            device_model = {k: to_case.get(k, identity)(row_content[k]) for k in device_fields}
+            device_values_list.append(device_model)
         add_res = AddDevicesCase(self.repo).add_devices(device_values_list)
         self._update_edit_table()
         return add_res

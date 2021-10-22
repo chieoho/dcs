@@ -29,7 +29,7 @@ def identity(item):
     return item
 
 
-edit_det_view_fields = (
+edit_det_model = (
     "area",
     "address_code",
     "position",
@@ -46,7 +46,6 @@ class EditDetectorsController(object):
         self.view = view
 
         self.detectors_from_repo = []  # 主要为了保存行数与设备在数据库的id的对应关系
-        self._update_edit_table()
 
     def _update_edit_table(self):
         del self.detectors_from_repo[:]
@@ -54,7 +53,8 @@ class EditDetectorsController(object):
         self.detectors_from_repo.extend(detectors_from_repo)
         edit_detectors_list = []
         for dev in self.detectors_from_repo:
-            edit_detectors_list.append({k: to_view.get(k, identity)(dev[k]) for k in edit_det_view_fields})
+            model = {k: to_view.get(k, identity)(dev[k]) for k in edit_det_model}
+            edit_detectors_list.append(model)
         self.view.update_edit_table(edit_detectors_list)
 
     def add_detector_rows(self, row_content_list):

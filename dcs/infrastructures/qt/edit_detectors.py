@@ -15,7 +15,7 @@ from dcs.infrastructures.qt.utils import (
     get_unicode_content,
     get_selected_rows,
 )
-from dcs.adapter.edit_detector_view import EditDetectorsController
+from dcs.adapter.edit_detector_view import EditDetectorsController, detector_fields, edit_det_model
 from dcs.infrastructures.database.repo import DetRepo
 
 
@@ -26,15 +26,6 @@ class EditDetectors(object):
         self.ui = mw.ui
         self.mw = mw
         self.detector_edit_table = self.ui.winfotableWidget
-        self.det_edit_fields = (
-            "area",
-            "address_code",
-            "position",
-            "decimal_point",
-            "material",
-            "unit",
-            "install_time"
-        )
 
         self.mw.connect(self.ui.waddButton, QtCore.SIGNAL('clicked()'), static(self.add_detectors))
         self.mw.connect(self.ui.wlineEdit, QtCore.SIGNAL('returnPressed()'), self.add_detectors)
@@ -47,7 +38,7 @@ class EditDetectors(object):
     def update_edit_table(self, edit_detectors_list):
         all_records = []
         for dev in edit_detectors_list:
-            all_records.append([dev[k] for k in self.det_edit_fields])
+            all_records.append([dev[k] for k in edit_det_model])
         self.mw.disconnect(self.detector_edit_table, QtCore.SIGNAL('cellChanged(int,int)'), self.modify_detector)
         update_table(self.detector_edit_table, all_records)
         self.mw.connect(self.detector_edit_table, QtCore.SIGNAL('cellChanged(int,int)'), self.modify_detector)
@@ -65,13 +56,13 @@ class EditDetectors(object):
                 area,
                 controller_code,
                 "8001",
-                "0" * (2 - len(str(i + 1))) + str(i + 1),
+                "0" * (3 - len(str(i + 1))) + str(i + 1),
                 "1",
                 u'甲烷',
                 "%LEL",
                 time.strftime("%Y-%m-%d")
             ]
-            detector_values_list.append(dict(zip(self.det_edit_fields, row_content)))
+            detector_values_list.append(dict(zip(detector_fields, row_content)))
         self.edit_det_controller.add_detector_rows(detector_values_list)
 
     def modify_detector(self, row, column):
