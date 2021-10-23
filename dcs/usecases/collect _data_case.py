@@ -10,16 +10,16 @@ from threading import Thread
 
 
 class Collection(Thread):
-    def __init__(self, gatherer, interval, dev_num_list):
+    def __init__(self, gatherer, interval, monitor_num_list):
         super(Collection, self).__init__()
         self.gatherer = gatherer
         self.interval = interval
-        self.dev_num_list = dev_num_list
+        self.monitor_num_list = monitor_num_list
         self.output_data = {}
 
     def run(self):
         while 1:
-            for dev_num in self.dev_num_list:
-                data = self.gatherer.get_data(dev_num)
-                self.output_data[dev_num] = data
+            for monitor_num in self.monitor_num_list:
+                data = self.gatherer.get_data(monitor_num)
+                self.output_data[monitor_num] = data
             time.sleep(self.interval)

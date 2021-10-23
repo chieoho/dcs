@@ -7,25 +7,31 @@
 """
 
 
-class DevRepoIf(object):
-    def add_devices(self, device_list):
+class MonitorRepoIf(object):
+    def get_monitors(self):
         pass
 
-    def get_devices(self):
+    def get_monitors_count(self):
         pass
 
-    def modify_device(self, _id, new_device_info):
+    def add_monitors(self, monitor_list):
         pass
 
-    def delete_devices(self, _id_list):
+    def modify_monitor(self, _id, new_monitor_info):
+        pass
+
+    def delete_monitors(self, _id_list):
         pass
 
 
-class DetRepoIf(object):
+class DetectorRepoIf(object):
+    def get_detectors(self, monitor_code):
+        pass
+
+    def get_detectors_count(self, monitor_code):
+        pass
+
     def add_detectors(self, detector_list):
-        pass
-
-    def get_detectors(self):
         pass
 
     def modify_detector(self, _id, new_detector_info):
@@ -35,5 +41,5 @@ class DetRepoIf(object):
         pass
 
 
-dev_repo_if = DevRepoIf()
-det_repo_if = DetRepoIf()
+monitor_repo_if = MonitorRepoIf()
+detector_repo_if = DetectorRepoIf()

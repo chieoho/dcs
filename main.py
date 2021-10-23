@@ -3,9 +3,9 @@ import sys
 from PyQt4 import QtGui
 from PyQt4.QtGui import QApplication
 from PyQt4.QtCore import Qt
-from dcs.infrastructures.qt.main_window import MainWindow
-from dcs.infrastructures.qt.edit_devices import EditDevices
-from dcs.infrastructures.qt.edit_detectors import EditDetectors
+from dcs.infrastructures.qt.qt_main_window import MainWindow
+from dcs.infrastructures.qt.qt_edit_monitors import EditMonitors
+from dcs.infrastructures.qt.qt_edit_detectors import EditDetectors
 
 
 def main():
@@ -13,7 +13,7 @@ def main():
     app.setFont(QApplication.font())
 
     main_win = MainWindow()
-    EditDevices(main_win)
+    EditMonitors(main_win)
     EditDetectors(main_win)
 
     main_win.setWindowFlags(Qt.CustomizeWindowHint | Qt.FramelessWindowHint)  # 去掉标题栏

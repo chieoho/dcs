@@ -18,18 +18,6 @@ class CRUD:
     def __del__(self):
         self.session.close()
 
-    def add(self, records):
-        """
-        往table添加多条记录
-        :param records: 记录信息列表
-        :return: 成功返回True，失败返回False
-        """
-        for r in records:
-            new_record = self.model(**r)
-            self.session.add(new_record)
-        self.session.commit()
-        return True
-
     @staticmethod
     def row2dict(query_obj, col_names):
         d = {}
@@ -71,6 +59,24 @@ class CRUD:
             results = list(map(row2dict, query_obj))
             return results
         return []
+
+    def count(self, cond):
+        if all(cond.values()):
+            query_obj = self._query(self.model, cond)
+            return query_obj.count()
+        return 0
+
+    def add(self, records):
+        """
+        往table添加多条记录
+        :param records: 记录信息列表
+        :return: 成功返回True，失败返回False
+        """
+        for r in records:
+            new_record = self.model(**r)
+            self.session.add(new_record)
+        self.session.commit()
+        return True
 
     def update(self, cond, new_info):
         """

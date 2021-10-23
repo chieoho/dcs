@@ -131,7 +131,7 @@ class MainWindow(QtGui.QMainWindow):
         self.connect(self.update_timer, QtCore.SIGNAL('timeout()'), self.fullScreen)
 
         self.connect(self.ui.mainuiButton, QtCore.SIGNAL('clicked()'), self.mainuiBthandle)
-        self.connect(self.ui.deinfoButton, QtCore.SIGNAL('clicked()'), self.deviceinfoBthandle)
+        self.connect(self.ui.deinfoButton, QtCore.SIGNAL('clicked()'), self.monitorinfoBthandle)
         self.connect(self.ui.alarmquButton, QtCore.SIGNAL('clicked()'), self.alarmquBthandle)
         self.connect(self.ui.controlButton, QtCore.SIGNAL('clicked()'), self.controlBthandle)
         self.connect(self.ui.exitButton, QtCore.SIGNAL('clicked()'), self.exitSystem)
@@ -240,7 +240,7 @@ class MainWindow(QtGui.QMainWindow):
         self.ui.controlButton.setStyleSheet(buttonStyleSheet)
         self.ui.mainuiButton.setStyleSheet(self.activeStateColor)
 
-    def deviceinfoBthandle(self):
+    def monitorinfoBthandle(self):
         self.stateid = 2
         self.ui.mainuiButton.setEnabled(True)
         self.ui.alarmquButton.setEnabled(True)

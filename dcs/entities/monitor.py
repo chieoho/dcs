@@ -7,7 +7,7 @@
 """
 
 
-class Device(object):
+class Monitor(object):
     """
     直接接入系统的设备
     """
