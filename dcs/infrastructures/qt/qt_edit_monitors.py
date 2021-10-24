@@ -34,8 +34,6 @@ class EditMonitors(object):
             "phone_num_3",
             "phone_num_4"
         )
-        # self.monitor_monitoring_table = self.ui.tableWidget1
-        # self.detector_edit_table = self.ui.winfotableWidget
 
         self.mw.connect(self.ui.addButton, QtCore.SIGNAL('clicked()'), static(self.add_monitors))
         self.mw.connect(self.ui.lineEdit, QtCore.SIGNAL('returnPressed()'), self.add_monitors)

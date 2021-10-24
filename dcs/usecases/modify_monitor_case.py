@@ -14,6 +14,18 @@ class ModifyMonitorCase(object):
 
     def modify_monitor(self, _id, new_monitor_info):
         """
+        :param _id:
+        :param new_monitor_info:
+        :return:
         """
         res = self.repo.modify_monitor(_id, new_monitor_info)
+        return res
+
+    def modify_monitor_by_code(self, monitor_code, new_monitor_info):
+        """
+        :param monitor_code:
+        :param new_monitor_info:
+        :return:
+        """
+        res = self.repo.modify_monitor_by_code(monitor_code, new_monitor_info)
         return res

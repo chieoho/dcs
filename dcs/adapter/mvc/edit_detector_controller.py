@@ -11,7 +11,8 @@ from dcs.usecases.add_detectors_case import AddDetectorsCase, detector_id
 from dcs.usecases.get_detectors_case import GetDetectorsCase
 from dcs.usecases.modify_detector_case import ModifyDetectorCase
 from dcs.usecases.delete_detectors_case import DeleteDetectorsCase
-from dcs.adapter.sqls.repo import DetectorRepo
+from dcs.usecases.modify_monitor_case import ModifyMonitorCase
+from dcs.adapter.sqls.repo import DetectorRepo, MonitorRepo
 
 
 to_view = {
@@ -46,6 +47,7 @@ class EditDetectorsController(object):
         self.view = view
 
         self.detector_repo = DetectorRepo(session)
+        self.monitor_repo = MonitorRepo(session)
         self.detectors_from_repo = []  # 主要为了保存行数与设备在数据库的id的对应关系
         self.monitor_code = ""
 
@@ -55,8 +57,12 @@ class EditDetectorsController(object):
         self.detectors_from_repo.extend(detectors_from_repo)
         edit_detectors_list = []
         for dev in self.detectors_from_repo:
-            model = {k: to_view.get(k, identity)(dev[k]) for k in edit_detector_model}
-            edit_detectors_list.append(model)
+            detector_info = {k: to_view.get(k, identity)(dev.get(k, "")) for k in edit_detector_model}
+            edit_detectors_list.append(detector_info)
+        ModifyMonitorCase(self.monitor_repo).modify_monitor_by_code(
+            self.monitor_code,
+            {"detector_num": len(edit_detectors_list)}
+        )
         self.view.update_edit_table(edit_detectors_list)
 
     def set_monitor_code(self, monitor_code):

@@ -26,6 +26,9 @@ class MonitorRepo(MonitorRepoIf):
     def modify_monitor(self, _id, new_monitor_info):
         return self.monitor_crud.update({"_id": [_id]}, new_monitor_info)
 
+    def modify_monitor_by_code(self, monitor_code, new_monitor_info):
+        return self.monitor_crud.update({"code": [monitor_code]}, new_monitor_info)
+
     def delete_monitors(self, _id_list):
         return self.monitor_crud.delete({"_id": _id_list})
 

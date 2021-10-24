@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-@file: edit_monitors_controller
+@file: edit_monitor_controller
 @desc:
 @author: Jaden Wu
 @time: 2021/10/17 11:21
@@ -56,8 +56,9 @@ class EditMonitorsController(object):
         monitors_from_repo = GetMonitorsCase(self.monitor_repo).get_monitors()
         self.monitors_from_repo.extend(monitors_from_repo)
         edit_monitors_list = []
-        for dev in self.monitors_from_repo:
-            edit_monitors_list.append({k: to_view.get(k, identity)(dev[k]) for k in edit_monitor_model})
+        for mon in self.monitors_from_repo:
+            monitor_info = {k: to_view.get(k, identity)(mon.get(k, "")) for k in edit_monitor_model}
+            edit_monitors_list.append(monitor_info)
         self.view.update_edit_table(edit_monitors_list)
 
     def add_monitor_rows(self, monitor_num):

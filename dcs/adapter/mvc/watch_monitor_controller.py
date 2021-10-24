@@ -11,7 +11,7 @@ import time
 from dcs.usecases.collect_data_case import CollectDataCase
 from dcs.usecases.get_monitors_case import GetMonitorsCase
 from dcs.adapter.sqls.repo import MonitorRepo
-from dcs.adapter.serial_port.gatherer import Gatherer
+from dcs.adapter.gatherer.gatherer import Gatherer
 
 to_view = {
     "detector_num": str,
@@ -25,19 +25,18 @@ def identity(item):
 
 watch_monitor_model = (
     "area",
-    "code",
     "detector_num",
-    "install_time",
-    "phone_num_1",
-    "phone_num_2",
-    "phone_num_3",
-    "phone_num_4"
+    "alarm_num",
+    "fault_num",
+    "state",
+    "code",
+    "install_time"
 )
 
 
 class WatchMonitorController(Thread):
     def __init__(self, view, session, port):
-        super(WatchMonitorController).__init__()
+        super(WatchMonitorController, self).__init__()
         self.view = view
 
         self.is_running = False
@@ -48,8 +47,9 @@ class WatchMonitorController(Thread):
     def _update_edit_table(self):
         monitors_from_repo = GetMonitorsCase(self.monitor_repo).get_monitors()
         watch_monitors_list = []
-        for dev in monitors_from_repo:
-            watch_monitors_list.append({k: to_view.get(k, identity)(dev[k]) for k in watch_monitor_model})
+        for mon in monitors_from_repo:
+            monitor_info = {k: to_view.get(k, identity)(mon.get(k, "")) for k in watch_monitor_model}
+            watch_monitors_list.append(monitor_info)
         self.view.update_edit_table(watch_monitors_list)
 
     def start(self):

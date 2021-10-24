@@ -20,6 +20,9 @@ class MonitorRepoIf(object):
     def modify_monitor(self, _id, new_monitor_info):
         pass
 
+    def modify_monitor_by_code(self, monitor_code, new_monitor_info):
+        pass
+
     def delete_monitors(self, _id_list):
         pass
 

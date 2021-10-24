@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from PyQt4 import QtCore, QtGui
 from dcs.infrastructures.qt.ui.dcs_ui import Ui_MainWindow
+from dcs.infrastructures.qt.qt_utils import get_unicode_content
 
 
 buttonStyleSheet = '''
@@ -291,8 +292,8 @@ class MainWindow(QtGui.QMainWindow):
         self.combox_region.append(u'所有')
         self.combox_ctrller.append(u'所有')
         for i in range(0, self.ui.tableWidget1.rowCount()):
-            self.combox_region.append(self.getucontent(self.ui.tableWidget1.item(i, 0)))
-            self.combox_ctrller.append(self.getucontent(self.ui.tableWidget1.item(i, 5)))
+            self.combox_region.append(get_unicode_content(self.ui.tableWidget1.item(i, 0)))
+            self.combox_ctrller.append(get_unicode_content(self.ui.tableWidget1.item(i, 5)))
         self.ui.comboBox_region.clear()
         self.ui.comboBox_ctrller.clear()
         self.ui.wcomboBox_region.clear()

@@ -6,6 +6,7 @@ from PyQt4.QtCore import Qt
 from dcs.infrastructures.qt.qt_main_window import MainWindow
 from dcs.infrastructures.qt.qt_edit_monitors import EditMonitors
 from dcs.infrastructures.qt.qt_edit_detectors import EditDetectors
+from dcs.infrastructures.qt.qt_watch_monitor import WatchMonitors
 
 
 def main():
@@ -15,6 +16,7 @@ def main():
     main_win = MainWindow()
     EditMonitors(main_win)
     EditDetectors(main_win)
+    WatchMonitors(main_win)
 
     main_win.setWindowFlags(Qt.CustomizeWindowHint | Qt.FramelessWindowHint)  # 去掉标题栏
     app.setFont(QApplication.font())
