@@ -5,8 +5,6 @@
 @author: Jaden Wu
 @time: 2021/10/20 21:46
 """
-import time
-
 from PyQt4 import QtCore, QtGui
 from dcs.infrastructures.qt.qt_main_window import MainWindow
 from dcs.infrastructures.qt.qt_utils import (
@@ -15,7 +13,8 @@ from dcs.infrastructures.qt.qt_utils import (
     get_unicode_content,
     get_selected_rows,
 )
-from dcs.adapter.edit_detector_controller import EditDetectorsController, detector_fields, edit_detector_model
+from dcs.adapter.edit_detector_controller import EditDetectorsController, edit_detector_model
+from dcs.infrastructures.database import engine, make_session
 
 
 class EditDetectors(object):
@@ -35,7 +34,7 @@ class EditDetectors(object):
         self.mw.connect(self.ui.wdelButton, QtCore.SIGNAL('clicked()'), static(self.delete_detectors))
         self.mw.connect(self.ui.weditButton, QtCore.SIGNAL('clicked()'), static(self.edit_detector_enable))
 
-        self.edit_detector_controller = EditDetectorsController(self)  # 放在最后
+        self.edit_detector_controller = EditDetectorsController(self, make_session(engine))  # 放在最后
 
     def get_select_controller_for_edit(self, row):
         if self.ui.addButton.isEnabled():  # 控制器编辑状态下不跳转
@@ -83,7 +82,7 @@ class EditDetectors(object):
         content = unicode(content, 'gbk', 'ignore')
         area = '-'.join(content.split('-')[0: -1])
         monitor_code = content.split('-')[-1][0: 2]
-        detector_num = int(self.ui.lineEdit.text())
+        detector_num = int(self.ui.wlineEdit.text())
         self.edit_detector_controller.add_detector_rows(area, monitor_code, detector_num)
 
     def modify_detector(self, row, column):

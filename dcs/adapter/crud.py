@@ -6,14 +6,13 @@
 @time: 2021/10/4 22:41
 """
 from functools import partial
-from dcs.infrastructures.database import engine, make_session
 from sqlalchemy import and_, or_
 
 
 class CRUD:
-    def __init__(self, model):
+    def __init__(self, model, session):
         self.model = model
-        self.session = make_session(engine)
+        self.session = session
 
     def __del__(self):
         self.session.close()
@@ -42,7 +41,10 @@ class CRUD:
                 raise Exception('dict value in cond should be list')
         key_column_list = [(col, getattr(model, col)) for col in cond.keys()]
         condition = self._gen_query_condition(cond, key_column_list)
-        query_obj = self.session.query(model).filter(and_(*condition))
+        if condition:
+            query_obj = self.session.query(model).filter(and_(*condition))
+        else:
+            query_obj = self.session.query(model)
         return query_obj
 
     def query(self, cond, ret_columns=()):

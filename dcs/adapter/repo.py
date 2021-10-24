@@ -11,8 +11,8 @@ from dcs.adapter.crud import CRUD
 
 
 class MonitorRepo(MonitorRepoIf):
-    def __init__(self):
-        self.monitor_crud = CRUD(Monitor)
+    def __init__(self, session):
+        self.monitor_crud = CRUD(Monitor, session)
 
     def get_monitors(self):
         return self.monitor_crud.query({})
@@ -31,8 +31,8 @@ class MonitorRepo(MonitorRepoIf):
 
 
 class DetectorRepo(DetectorRepoIf):
-    def __init__(self):
-        self.detector_crud = CRUD(Detector)
+    def __init__(self, session):
+        self.detector_crud = CRUD(Detector, session)
         
     def get_detectors(self, monitor_code):
         return self.detector_crud.query({"monitor_code": [monitor_code]})

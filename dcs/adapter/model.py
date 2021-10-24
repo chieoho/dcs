@@ -6,7 +6,10 @@
 @time: 2021/10/4 21:54
 """
 from sqlalchemy import Column, Integer, String, DateTime
-from dcs.infrastructures.database import Base
+from sqlalchemy.ext.declarative import declarative_base
+
+
+Base = declarative_base()
 
 
 class Monitor(Base):

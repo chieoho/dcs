@@ -14,6 +14,7 @@ from dcs.infrastructures.qt.qt_utils import (
     get_selected_rows,
 )
 from dcs.adapter.edit_monitor_controller import EditMonitorsController
+from dcs.infrastructures.database import engine, make_session
 
 
 class EditMonitors(object):
@@ -42,7 +43,7 @@ class EditMonitors(object):
         self.mw.connect(self.ui.delButton, QtCore.SIGNAL('clicked()'), static(self.delete_monitors))
         self.mw.connect(self.ui.editButton, QtCore.SIGNAL('clicked()'), static(self.edit_monitor_enable))
 
-        self.edit_monitor_controller = EditMonitorsController(self)  # 放在最后
+        self.edit_monitor_controller = EditMonitorsController(self, make_session(engine))  # 放在最后
 
     def update_edit_table(self, edit_monitors_list):
         all_records = []

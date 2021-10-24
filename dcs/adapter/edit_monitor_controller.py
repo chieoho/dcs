@@ -43,11 +43,11 @@ edit_monitor_model = (
 
 
 class EditMonitorsController(object):
-    def __init__(self, view):
+    def __init__(self, view, session):
         self.view = view
 
-        self.monitor_repo = MonitorRepo()
-        self.detector_repo = DetectorRepo()
+        self.monitor_repo = MonitorRepo(session)
+        self.detector_repo = DetectorRepo(session)
         self.monitors_from_repo = []  # 主要为了保存行数与设备在数据库的id的对应关系
         self._update_edit_table()
 
