@@ -13,7 +13,7 @@ from dcs.infrastructures.qt.qt_utils import (
     get_unicode_content,
     get_selected_rows,
 )
-from dcs.adapter.edit_detector_controller import EditDetectorsController, edit_detector_model
+from dcs.adapter.mvc.edit_detector_controller import EditDetectorsController, edit_detector_model
 from dcs.infrastructures.database import engine, make_session
 
 

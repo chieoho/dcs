@@ -6,11 +6,11 @@
 @time: 2021/10/17 11:03
 """
 from dcs.usecases.add_monitors_case import monitor_fields
-from dcs.adapter.edit_monitor_controller import EditMonitorsController
+from dcs.adapter.mvc.edit_monitor_controller import EditMonitorsController
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 
-from dcs.adapter.model import Base
+from dcs.adapter.sqls.model import Base
 
 
 class DB(object):

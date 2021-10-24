@@ -11,7 +11,7 @@ from dcs.usecases.add_detectors_case import AddDetectorsCase, detector_id
 from dcs.usecases.get_detectors_case import GetDetectorsCase
 from dcs.usecases.modify_detector_case import ModifyDetectorCase
 from dcs.usecases.delete_detectors_case import DeleteDetectorsCase
-from dcs.adapter.repo import DetectorRepo
+from dcs.adapter.sqls.repo import DetectorRepo
 
 
 to_view = {

@@ -11,7 +11,7 @@ from dcs.usecases.add_monitors_case import AddMonitorsCase, monitor_fields, moni
 from dcs.usecases.get_monitors_case import GetMonitorsCase
 from dcs.usecases.modify_monitor_case import ModifyMonitorCase
 from dcs.usecases.delete_monitors_case import DeleteMonitorsCase
-from dcs.adapter.repo import MonitorRepo, DetectorRepo
+from dcs.adapter.sqls.repo import MonitorRepo, DetectorRepo
 
 
 to_view = {

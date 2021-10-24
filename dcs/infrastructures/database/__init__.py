@@ -8,8 +8,8 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 
-from dcs.adapter.model import Base
-from dcs.adapter.db_utils import create_database
+from dcs.adapter.sqls.model import Base
+from dcs.adapter.sqls.db_utils import create_database
 
 
 class DB(object):

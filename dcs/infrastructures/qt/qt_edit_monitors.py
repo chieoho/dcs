@@ -13,7 +13,7 @@ from dcs.infrastructures.qt.qt_utils import (
     get_unicode_content,
     get_selected_rows,
 )
-from dcs.adapter.edit_monitor_controller import EditMonitorsController
+from dcs.adapter.mvc.edit_monitor_controller import EditMonitorsController
 from dcs.infrastructures.database import engine, make_session
 
 

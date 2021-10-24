@@ -6,8 +6,8 @@
 @time: 2021/10/5 8:42
 """
 from dcs.usecases.repo_if import MonitorRepoIf, DetectorRepoIf
-from dcs.adapter.model import Monitor, Detector
-from dcs.adapter.crud import CRUD
+from dcs.adapter.sqls.model import Monitor, Detector
+from dcs.adapter.sqls.crud import CRUD
 
 
 class MonitorRepo(MonitorRepoIf):
