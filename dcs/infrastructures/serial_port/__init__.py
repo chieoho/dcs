@@ -16,5 +16,6 @@ def init_port(port, brt, timeout, raise_or_not=False, parity='M', byte_size=8, s
                              writeTimeout=60)
         return port
     except serial.SerialException as e:
+        print(e)
         if raise_or_not:
             raise e

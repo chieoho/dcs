@@ -51,7 +51,7 @@ class EditDetectorsController(object):
         self.detectors_from_repo = []  # 主要为了保存行数与设备在数据库的id的对应关系
         self.monitor_code = ""
 
-    def _update_edit_table(self):
+    def update_edit_table(self):
         del self.detectors_from_repo[:]
         detectors_from_repo = GetDetectorsCase(self.detector_repo).get_detectors(self.monitor_code)
         self.detectors_from_repo.extend(detectors_from_repo)
@@ -67,22 +67,22 @@ class EditDetectorsController(object):
 
     def set_monitor_code(self, monitor_code):
         self.monitor_code = monitor_code
-        self._update_edit_table()
+        self.update_edit_table()
 
     def add_detector_rows(self, area, monitor_code, detector_num):
         add_res = AddDetectorsCase(self.detector_repo).add_detectors(area, monitor_code, detector_num)
-        self._update_edit_table()
+        self.update_edit_table()
         return add_res
 
     def modify_detector_row(self, row, col, content):
         _id = self.detectors_from_repo[row][detector_id]
         new_detector_info = {edit_detector_model[col]: content}
         modify_res = ModifyDetectorCase(self.detector_repo).modify_detector(_id, new_detector_info)
-        self._update_edit_table()
+        self.update_edit_table()
         return modify_res
 
     def delete_detector_rows(self, rows):
         _id_list = map(lambda r: self.detectors_from_repo[r][detector_id], rows)
         delete_res = DeleteDetectorsCase(self.detector_repo).delete_detectors(_id_list)
-        self._update_edit_table()
+        self.update_edit_table()
         return delete_res

@@ -84,6 +84,7 @@ class EditDetectors(object):
         monitor_code = content.split('-')[-1][0: 2]
         detector_num = int(self.ui.wlineEdit.text())
         self.edit_detector_controller.add_detector_rows(area, monitor_code, detector_num)
+        self.mw.emit(QtCore.SIGNAL('update_detector_num'))
 
     def modify_detector(self, row, column):
         content = get_unicode_content(self.detector_edit_table.item(row, column))
@@ -98,3 +99,4 @@ class EditDetectors(object):
         if reply == QtGui.QMessageBox.Yes:
             remove_rows = get_selected_rows(self.detector_edit_table)
             self.edit_detector_controller.delete_detector_rows(remove_rows)
+            self.mw.emit(QtCore.SIGNAL('update_detector_num'))

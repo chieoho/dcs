@@ -42,20 +42,20 @@ class WatchMonitorController(Thread):
         self.is_running = False
         self.monitor_repo = MonitorRepo(session)
         self.collect_case = CollectDataCase(Gatherer(port))
-        self._update_edit_table()
+        self._update_table()
 
-    def _update_edit_table(self):
+    def _update_table(self):
         monitors_from_repo = GetMonitorsCase(self.monitor_repo).get_monitors()
         watch_monitors_list = []
         for mon in monitors_from_repo:
             monitor_info = {k: to_view.get(k, identity)(mon.get(k, "")) for k in watch_monitor_model}
             watch_monitors_list.append(monitor_info)
-        self.view.update_edit_table(watch_monitors_list)
+        self.view.update_table(watch_monitors_list)
 
-    def start(self):
+    def start_running(self):
         self.is_running = True
 
-    def stop(self):
+    def stop_running(self):
         self.is_running = False
 
     def run(self):

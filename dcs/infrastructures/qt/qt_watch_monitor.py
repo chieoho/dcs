@@ -39,8 +39,9 @@ class WatchMonitors(object):
             make_session(engine),
             init_port('COM1', 9600, 0.1, False)
         )
+        self.watch_monitor_controller.start()
 
-    def update_edit_table(self, edit_monitors_list):
+    def update_table(self, edit_monitors_list):
         all_records = []
         for dev in edit_monitors_list:
             all_records.append([dev[k] for k in self.watch_monitor_fields])

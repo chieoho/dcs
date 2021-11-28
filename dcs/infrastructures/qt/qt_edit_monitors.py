@@ -40,6 +40,7 @@ class EditMonitors(object):
         self.mw.connect(self.monitor_edit_table, QtCore.SIGNAL('cellChanged(int,int)'), self.modify_monitor)
         self.mw.connect(self.ui.delButton, QtCore.SIGNAL('clicked()'), static(self.delete_monitors))
         self.mw.connect(self.ui.editButton, QtCore.SIGNAL('clicked()'), static(self.edit_monitor_enable))
+        self.mw.connect(self.mw, QtCore.SIGNAL('update_detector_num'), self.update_detector_num)
 
         self.edit_monitor_controller = EditMonitorsController(self, make_session(engine))  # 放在最后
 
@@ -50,6 +51,9 @@ class EditMonitors(object):
         self.mw.disconnect(self.monitor_edit_table, QtCore.SIGNAL('cellChanged(int,int)'), self.modify_monitor)
         update_table(self.monitor_edit_table, all_records)
         self.mw.connect(self.monitor_edit_table, QtCore.SIGNAL('cellChanged(int,int)'), self.modify_monitor)
+
+    def update_detector_num(self):
+        self.edit_monitor_controller.update_edit_table()
 
     def edit_monitor_enable(self):
         reply = QtGui.QMessageBox.question(

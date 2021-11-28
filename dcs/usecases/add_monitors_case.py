@@ -29,7 +29,7 @@ class AddMonitorsCase:
     def add_monitors(self, monitor_num):
         """
         添加设备
-        :param monitor_num: 字典列表
+        :param monitor_num
         :return:
         """
         monitor_list = []
